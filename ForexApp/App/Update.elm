@@ -1,8 +1,8 @@
-module Update exposing (..)
-import Model exposing (Model)
-import Route exposing (..)
-import Msg exposing (Msg)
-import Pages.Exchange.Update
+module ForexApp.App.Update exposing (..)
+import ForexApp.App.Model exposing (Model)
+import ForexApp.App.Route exposing (..)
+import ForexApp.App.Msg as Msg exposing (Msg)
+import ForexApp.App.Pages.Exchange.Update
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -18,7 +18,7 @@ update msg model =
     Msg.ExchangePageMessage subMsg ->
       let
         ( updatedWidgetModel, widgetCmd ) =
-            Pages.Exchange.Update.update subMsg model.exchangePageModel
+            ForexApp.App.Pages.Exchange.Update.update subMsg model.exchangePageModel
       in
         ( { model | exchangePageModel = updatedWidgetModel }, Cmd.map Msg.ExchangePageMessage widgetCmd )
 

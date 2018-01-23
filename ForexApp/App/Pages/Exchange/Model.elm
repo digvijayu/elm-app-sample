@@ -1,4 +1,4 @@
-module Pages.Exchange.Model exposing (..)
+module ForexApp.App.Pages.Exchange.Model exposing (..)
 
 type alias Model =
   { gbpAmount : Float

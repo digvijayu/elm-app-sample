@@ -1,8 +1,8 @@
-module Pages.Confirm.View exposing (..)
+module ForexApp.App.Pages.Confirm.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Json.Encode exposing (string)
-import Model
+import ForexApp.App.Model as Model
 
 view : Model.Model -> Html msg
 view appModel =

@@ -1,16 +1,16 @@
-module App exposing (..)
+module ForexApp.App exposing (..)
 import Navigation exposing (Location)
-import Model exposing (Model)
-import Msg exposing (Msg)
-import Update exposing (update)
-import Model exposing (Model, initAppModel)
-import Route exposing (..)
-import View exposing (view)
+import ForexApp.App.Model exposing (Model)
+import ForexApp.App.Msg exposing (Msg)
+import ForexApp.App.Update exposing (update)
+import ForexApp.App.Model exposing (Model, initAppModel)
+import ForexApp.App.Route exposing (..)
+import ForexApp.App.View exposing (view)
 
 
 main : Program Never Model Msg
 main =
-  Navigation.program Msg.OnRouteChange
+  Navigation.program ForexApp.App.Msg.OnRouteChange
   { init = init
   , view = view
   , update = update

@@ -1,6 +1,6 @@
-module Pages.Exchange.Update exposing (..)
-import Pages.Exchange.Model exposing (Model)
-import Pages.Exchange.Msg as Msg
+module ForexApp.App.Pages.Exchange.Update exposing (..)
+import ForexApp.App.Pages.Exchange.Model exposing (Model)
+import ForexApp.App.Pages.Exchange.Msg as Msg
 
 update : Msg.Msg -> Model -> (Model, Cmd Msg.Msg)
 update msg model =

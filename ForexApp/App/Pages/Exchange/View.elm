@@ -1,9 +1,9 @@
-module Pages.Exchange.View exposing (..)
+module ForexApp.App.Pages.Exchange.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
-import Pages.Exchange.Model exposing (Model)
-import Pages.Exchange.Msg as Msg
+import ForexApp.App.Pages.Exchange.Model exposing (Model)
+import ForexApp.App.Pages.Exchange.Msg as Msg
 
 view : Model -> Html Msg.Msg
 view model =

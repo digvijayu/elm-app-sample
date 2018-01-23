@@ -1,4 +1,4 @@
-module Pages.Exchange.Msg exposing (..)
+module ForexApp.App.Pages.Exchange.Msg exposing (..)
 
 type Msg =
     OnGbpChange String
