@@ -1,8 +1,7 @@
-module App exposing (..)
+module HolidaysApp exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-main : Html msg
 main =
   view
 

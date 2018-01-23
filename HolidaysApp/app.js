@@ -8145,7 +8145,7 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 
-var _user$project$App$view = A2(
+var _user$project$HolidaysApp$view = A2(
 	_elm_lang$html$Html$div,
 	{
 		ctor: '::',
@@ -8420,12 +8420,12 @@ var _user$project$App$view = A2(
 			}
 		}
 	});
-var _user$project$App$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(_user$project$App$view);
+var _user$project$HolidaysApp$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(_user$project$HolidaysApp$view);
 
 var Elm = {};
-Elm['App'] = Elm['App'] || {};
-if (typeof _user$project$App$main !== 'undefined') {
-    _user$project$App$main(Elm['App'], 'App', undefined);
+Elm['HolidaysApp'] = Elm['HolidaysApp'] || {};
+if (typeof _user$project$HolidaysApp$main !== 'undefined') {
+    _user$project$HolidaysApp$main(Elm['HolidaysApp'], 'HolidaysApp', undefined);
 }
 
 if (typeof define === "function" && define['amd'])
