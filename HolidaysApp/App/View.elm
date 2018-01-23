@@ -1,12 +1,12 @@
-module HolidaysApp exposing (..)
+module HolidaysApp.App.View exposing (..)
+import HolidaysApp.App.Model as Model
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import ForexApp.App.View as ForexAppView
+import HolidaysApp.App.Msg as HolidaysAppMsg
 
-main =
-  view
-
-view : Html msg
-view =
+view : Model.Model -> Html HolidaysAppMsg.Msg
+view model =
   div [ class "container col-md-4 order-md-2 mb-4" ]
     [ h4 [ class "d-flex justify-content-between align-items-center mb-3" ]
         [ span [ class "text-muted" ]
@@ -50,4 +50,7 @@ view =
                 [ text "Currency Exchange" ]
             ]
         ]
+    , div [] [
+        Html.map HolidaysAppMsg.ForexAppMsg ( ForexAppView.view model.forexAppModel )
+      ]
     ]
