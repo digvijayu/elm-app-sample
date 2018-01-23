@@ -56,7 +56,7 @@ getPage model =
     Route.Home ->
       home model
     Route.ConfirmPage ->
-      confirmPage
+      confirmPage model
     Route.NotFoundRoute ->
       notFoundPage
 
@@ -64,9 +64,9 @@ home : Model -> Html Msg
 home model =
   Html.map Msg.ExchangePageMessage (Pages.Exchange.View.view model.exchangePageModel)
 
-confirmPage : Html msg
-confirmPage =
-  Pages.Confirm.View.view
+confirmPage : Model -> Html msg
+confirmPage model =
+  Pages.Confirm.View.view model
 
 notFoundPage : Html msg
 notFoundPage =

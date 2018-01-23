@@ -10331,7 +10331,7 @@ var _user$project$Pages_Exchange_View$view = function (model) {
 									_1: {
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$button,
+											_elm_lang$html$Html$a,
 											{
 												ctor: '::',
 												_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary'),
@@ -10340,7 +10340,7 @@ var _user$project$Pages_Exchange_View$view = function (model) {
 													_0: _elm_lang$html$Html_Attributes$disabled(!(model.validUsdValue && model.validGbpValue)),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Events$onClick(_user$project$Pages_Exchange_Msg$OnConfirm),
+														_0: _elm_lang$html$Html_Attributes$href('#confirm'),
 														_1: {
 															ctor: '::',
 															_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
@@ -10351,7 +10351,7 @@ var _user$project$Pages_Exchange_View$view = function (model) {
 											},
 											{
 												ctor: '::',
-												_0: _elm_lang$html$Html$text('Go to Confirm Page'),
+												_0: _elm_lang$html$Html$text('Confirm'),
 												_1: {ctor: '[]'}
 											}),
 										_1: {ctor: '[]'}
@@ -10365,85 +10365,362 @@ var _user$project$Pages_Exchange_View$view = function (model) {
 		});
 };
 
-var _user$project$Pages_Confirm_View$view = A2(
-	_elm_lang$html$Html$div,
-	{ctor: '[]'},
-	{
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$main_,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('container'),
-				_1: {
+var _user$project$Pages_Confirm_View$view = function (appModel) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('container col-md-4 order-md-2 mb-4'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h4,
+				{
 					ctor: '::',
-					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'main'),
+					_0: _elm_lang$html$Html_Attributes$class('d-flex justify-content-between align-items-center mb-3'),
 					_1: {ctor: '[]'}
-				}
-			},
-			{
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Your Order has been placed!'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$div,
+					_elm_lang$html$Html$ul,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('jumbotron'),
+						_0: _elm_lang$html$Html_Attributes$class('list-group mb-3'),
 						_1: {ctor: '[]'}
 					},
 					{
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$h1,
-							{ctor: '[]'},
+							_elm_lang$html$Html$li,
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Navbar example'),
+								_0: _elm_lang$html$Html_Attributes$class('list-group-item d-flex justify-content-between lh-condensed'),
 								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$h6,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('my-0'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Order Ref.'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$small,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Brief description'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$span,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('12345'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$p,
+								_elm_lang$html$Html$li,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('lead'),
+									_0: _elm_lang$html$Html_Attributes$class('list-group-item d-flex justify-content-between lh-condensed'),
 									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('This example is a quick exercise to illustrate how fixed to top navbar works. As you scroll, it will remain fixed to the top of your browser\'s viewport.'),
-									_1: {ctor: '[]'}
+									_0: A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$h6,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('my-0'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Cash'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$small,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Brief description'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$span,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														'$',
+														_elm_lang$core$Basics$toString(appModel.exchangePageModel.usdAmount))),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
 								}),
 							_1: {
 								ctor: '::',
 								_0: A2(
-									_elm_lang$html$Html$a,
+									_elm_lang$html$Html$li,
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$href('#'),
-											_1: {
-												ctor: '::',
-												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
-												_1: {ctor: '[]'}
-											}
-										}
+										_0: _elm_lang$html$Html_Attributes$class('list-group-item d-flex justify-content-between lh-condensed'),
+										_1: {ctor: '[]'}
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Go to Home Page'),
-										_1: {ctor: '[]'}
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$h6,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('my-0'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Sell Rate'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$small,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Brief description'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$span,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text(
+														_elm_lang$core$Basics$toString(appModel.exchangePageModel.exchangeRate)),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
 									}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('list-group-item d-flex justify-content-between bg-light'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('text-success'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$h6,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('my-0'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('You Pay'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$small,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Brief description'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$span,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('text-success'),
+														_1: {
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html_Attributes$property,
+																'innerHTML',
+																_elm_lang$core$Json_Encode$string(
+																	A2(
+																		_elm_lang$core$Basics_ops['++'],
+																		'&pound;',
+																		_elm_lang$core$Basics$toString(appModel.exchangePageModel.gbpAmount)))),
+															_1: {ctor: '[]'}
+														}
+													},
+													{ctor: '[]'}),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
 					}),
-				_1: {ctor: '[]'}
-			}),
-		_1: {ctor: '[]'}
-	});
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$form,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('card p-2'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('input-group'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$a,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$href('#'),
+												_1: {
+													ctor: '::',
+													_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
+													_1: {ctor: '[]'}
+												}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Book Another'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
 
 var _user$project$View$notFoundPage = A2(
 	_elm_lang$html$Html$div,
@@ -10468,7 +10745,9 @@ var _user$project$View$notFoundPage = A2(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$View$confirmPage = _user$project$Pages_Confirm_View$view;
+var _user$project$View$confirmPage = function (model) {
+	return _user$project$Pages_Confirm_View$view(model);
+};
 var _user$project$View$home = function (model) {
 	return A2(
 		_elm_lang$html$Html$map,
@@ -10481,7 +10760,7 @@ var _user$project$View$getPage = function (model) {
 		case 'Home':
 			return _user$project$View$home(model);
 		case 'ConfirmPage':
-			return _user$project$View$confirmPage;
+			return _user$project$View$confirmPage(model);
 		default:
 			return _user$project$View$notFoundPage;
 	}
