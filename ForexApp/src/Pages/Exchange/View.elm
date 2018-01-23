@@ -18,8 +18,13 @@ view model =
                         [ text "GBP Amount" ]
                     , input [ class "form-control", placeholder "", attribute "required" "", type_ "number", value (toString model.gbpAmount), onInput Msg.OnGbpChange ]
                         []
-                    , div [ class "invalid-feedback" ]
-                        [ text "Valid first name is required.                " ]
+                    , div
+                        [  classList
+                          [ ("invalid-feedback", True)
+                          , ("d-block", not model.validGbpValue)
+                          ]
+                        ]
+                        [ text "Valid GBP amount is required.                " ]
                     ]
                 , div [ class "col-md-6 mb-3" ]
                     [ label [ for "ExchangeRate" ]
@@ -27,7 +32,8 @@ view model =
                     , div [class "input-group"]
                       [ div [class "input-group-prepend"]
                         [ span [class "input-group-text"] [text "@"] ]
-                      , input [ class "form-control", readonly True, placeholder "", attribute "required" "", type_ "number", value (toString model.exchangeRate)  ]
+                      , input
+                        [ class "form-control", readonly True, placeholder "", attribute "required" "", type_ "number", value (toString model.exchangeRate)  ]
                           []
                       ]
                     ]
@@ -36,13 +42,18 @@ view model =
                         [ text "USD Amount" ]
                     , input [ class "form-control", placeholder "", attribute "required" "", type_ "number", value (toString model.usdAmount), onInput Msg.OnUsdChange  ]
                         []
-                    , div [ class "invalid-feedback" ]
+                    , div
+                        [  classList
+                          [ ("invalid-feedback", True)
+                          , ("d-block", not model.validUsdValue)
+                          ]
+                        ]
                         [ text "Valid last name is required.                " ]
                     ]
                 ]
             , hr [ class "mb-4" ]
                 []
-            , button [ class "btn btn-lg btn-primary", onClick Msg.OnConfirm, attribute "role" "button" ]
+            , button [ class "btn btn-lg btn-primary", disabled (not (model.validUsdValue && model.validGbpValue)), onClick Msg.OnConfirm, attribute "role" "button" ]
                 [ text "Go to Confirm Page" ]
             ]
         ]

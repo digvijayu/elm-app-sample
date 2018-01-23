@@ -1,6 +1,19 @@
 module Pages.Exchange.Model exposing (..)
 
-type alias Model = { gbpAmount : Float, usdAmount : Float, exchangeRate : Float }
+type alias Model =
+  { gbpAmount : Float
+  , usdAmount : Float
+  , exchangeRate : Float
+  , validGbpValue : Bool
+  , validUsdValue : Bool
+  }
+
+
 initialModel : Model
 initialModel =
-  { gbpAmount = 0, usdAmount = 0, exchangeRate = 1.39 }
+  { gbpAmount = 100
+  , usdAmount = 139
+  , exchangeRate = 1.39
+  , validGbpValue = True
+  , validUsdValue = True
+  }

@@ -9901,10 +9901,10 @@ var _user$project$Route$parseLocation = function (location) {
 	}
 };
 
-var _user$project$Pages_Exchange_Model$initialModel = {gbpAmount: 0, usdAmount: 0, exchangeRate: 1.39};
-var _user$project$Pages_Exchange_Model$Model = F3(
-	function (a, b, c) {
-		return {gbpAmount: a, usdAmount: b, exchangeRate: c};
+var _user$project$Pages_Exchange_Model$initialModel = {gbpAmount: 100, usdAmount: 139, exchangeRate: 1.39, validGbpValue: true, validUsdValue: true};
+var _user$project$Pages_Exchange_Model$Model = F5(
+	function (a, b, c, d, e) {
+		return {gbpAmount: a, usdAmount: b, exchangeRate: c, validGbpValue: d, validUsdValue: e};
 	});
 
 var _user$project$Model$initAppModel = F2(
@@ -9945,7 +9945,12 @@ var _user$project$Pages_Exchange_Update$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{gbpAmount: gbpAmt, usdAmount: gbpAmt * model.exchangeRate}),
+						{
+							gbpAmount: gbpAmt,
+							usdAmount: (_elm_lang$core$Native_Utils.cmp(gbpAmt, 0) > 0) ? (gbpAmt * model.exchangeRate) : 0,
+							validGbpValue: _elm_lang$core$Native_Utils.cmp(gbpAmt, 0) > 0,
+							validUsdValue: true
+						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'OnUsdChange':
@@ -9957,7 +9962,12 @@ var _user$project$Pages_Exchange_Update$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{usdAmount: usdAmt, gbpAmount: usdAmt / model.exchangeRate}),
+						{
+							usdAmount: usdAmt,
+							gbpAmount: (_elm_lang$core$Native_Utils.cmp(usdAmt, 0) > 0) ? (usdAmt / model.exchangeRate) : 0,
+							validGbpValue: true,
+							validUsdValue: _elm_lang$core$Native_Utils.cmp(usdAmt, 0) > 0
+						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			default:
@@ -10108,12 +10118,21 @@ var _user$project$Pages_Exchange_View$view = function (model) {
 															_elm_lang$html$Html$div,
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$class('invalid-feedback'),
+																_0: _elm_lang$html$Html_Attributes$classList(
+																	{
+																		ctor: '::',
+																		_0: {ctor: '_Tuple2', _0: 'invalid-feedback', _1: true},
+																		_1: {
+																			ctor: '::',
+																			_0: {ctor: '_Tuple2', _0: 'd-block', _1: !model.validGbpValue},
+																			_1: {ctor: '[]'}
+																		}
+																	}),
 																_1: {ctor: '[]'}
 															},
 															{
 																ctor: '::',
-																_0: _elm_lang$html$Html$text('Valid first name is required.                '),
+																_0: _elm_lang$html$Html$text('Valid GBP amount is required.                '),
 																_1: {ctor: '[]'}
 															}),
 														_1: {ctor: '[]'}
@@ -10274,7 +10293,16 @@ var _user$project$Pages_Exchange_View$view = function (model) {
 																	_elm_lang$html$Html$div,
 																	{
 																		ctor: '::',
-																		_0: _elm_lang$html$Html_Attributes$class('invalid-feedback'),
+																		_0: _elm_lang$html$Html_Attributes$classList(
+																			{
+																				ctor: '::',
+																				_0: {ctor: '_Tuple2', _0: 'invalid-feedback', _1: true},
+																				_1: {
+																					ctor: '::',
+																					_0: {ctor: '_Tuple2', _0: 'd-block', _1: !model.validUsdValue},
+																					_1: {ctor: '[]'}
+																				}
+																			}),
 																		_1: {ctor: '[]'}
 																	},
 																	{
@@ -10309,11 +10337,15 @@ var _user$project$Pages_Exchange_View$view = function (model) {
 												_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Pages_Exchange_Msg$OnConfirm),
+													_0: _elm_lang$html$Html_Attributes$disabled(!(model.validUsdValue && model.validGbpValue)),
 													_1: {
 														ctor: '::',
-														_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
-														_1: {ctor: '[]'}
+														_0: _elm_lang$html$Html_Events$onClick(_user$project$Pages_Exchange_Msg$OnConfirm),
+														_1: {
+															ctor: '::',
+															_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
+															_1: {ctor: '[]'}
+														}
 													}
 												}
 											},
