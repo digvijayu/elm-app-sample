@@ -6,7 +6,8 @@
     "source-directories": [
         ".",
         "./ForexApp/src/",
-        "./HolidaysApp/src/"
+        "./HolidaysApp/src/",
+        "./StoreLocator/"
     ],
     "exposed-modules": [],
     "dependencies": {

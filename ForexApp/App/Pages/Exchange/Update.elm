@@ -1,6 +1,7 @@
 module ForexApp.App.Pages.Exchange.Update exposing (..)
 import ForexApp.App.Pages.Exchange.Model exposing (Model)
 import ForexApp.App.Pages.Exchange.Msg as Msg
+import StoreLocator.Update
 
 update : Msg.Msg -> Model -> (Model, Cmd Msg.Msg)
 update msg model =
@@ -33,3 +34,13 @@ update msg model =
         )
     Msg.OnConfirm ->
       (model, Cmd.none)
+
+    Msg.OnDisplaySelectStores isModalVisible ->
+      ( { model | storeModalIsVisible = isModalVisible }, Cmd.none)
+
+    Msg.SelectStoreMsg subMsg->
+      let
+        (widgetModel, widgetCmd) =
+          StoreLocator.Update.update subMsg model.storeLocatorModel
+      in
+        ( { model | storeLocatorModel = widgetModel }, Cmd.map Msg.SelectStoreMsg widgetCmd )

@@ -1,4 +1,5 @@
 module ForexApp.App.Pages.Exchange.Model exposing (..)
+import StoreLocator.Model
 
 type alias Model =
   { gbpAmount : Float
@@ -6,6 +7,9 @@ type alias Model =
   , exchangeRate : Float
   , validGbpValue : Bool
   , validUsdValue : Bool
+  , selectedStore : Maybe StoreLocator.Model.Store
+  , storeLocatorModel : StoreLocator.Model.Model
+  , storeModalIsVisible : Bool
   }
 
 
@@ -16,4 +20,7 @@ initialModel =
   , exchangeRate = 1.39
   , validGbpValue = True
   , validUsdValue = True
+  , selectedStore = Nothing
+  , storeLocatorModel = StoreLocator.Model.initialModel
+  , storeModalIsVisible = False
   }

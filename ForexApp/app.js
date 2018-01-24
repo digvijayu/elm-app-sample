@@ -9901,10 +9901,35 @@ var _user$project$ForexApp_App_Route$parseLocation = function (location) {
 	}
 };
 
-var _user$project$ForexApp_App_Pages_Exchange_Model$initialModel = {gbpAmount: 100, usdAmount: 139, exchangeRate: 1.39, validGbpValue: true, validUsdValue: true};
-var _user$project$ForexApp_App_Pages_Exchange_Model$Model = F5(
+var _user$project$StoreLocator_Model$initialStoreList = {
+	ctor: '::',
+	_0: {address: 'Address 1', area: 'Brixton', lat: 0, $long: 0, distance: 1.3},
+	_1: {
+		ctor: '::',
+		_0: {address: 'Address 2', area: 'Hammersmith', lat: 0, $long: 0, distance: 2.4},
+		_1: {
+			ctor: '::',
+			_0: {address: 'Address 3', area: 'Great Portland', lat: 0, $long: 0, distance: 9.1},
+			_1: {ctor: '[]'}
+		}
+	}
+};
+var _user$project$StoreLocator_Model$Store = F5(
 	function (a, b, c, d, e) {
-		return {gbpAmount: a, usdAmount: b, exchangeRate: c, validGbpValue: d, validUsdValue: e};
+		return {address: a, area: b, lat: c, $long: d, distance: e};
+	});
+var _user$project$StoreLocator_Model$Model = F3(
+	function (a, b, c) {
+		return {activeView: a, storeList: b, selectedStore: c};
+	});
+var _user$project$StoreLocator_Model$MapView = {ctor: 'MapView'};
+var _user$project$StoreLocator_Model$ListView = {ctor: 'ListView'};
+var _user$project$StoreLocator_Model$initialModel = {activeView: _user$project$StoreLocator_Model$ListView, storeList: _user$project$StoreLocator_Model$initialStoreList, selectedStore: _elm_lang$core$Maybe$Nothing};
+
+var _user$project$ForexApp_App_Pages_Exchange_Model$initialModel = {gbpAmount: 100, usdAmount: 139, exchangeRate: 1.39, validGbpValue: true, validUsdValue: true, selectedStore: _elm_lang$core$Maybe$Nothing, storeLocatorModel: _user$project$StoreLocator_Model$initialModel, storeModalIsVisible: false};
+var _user$project$ForexApp_App_Pages_Exchange_Model$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {gbpAmount: a, usdAmount: b, exchangeRate: c, validGbpValue: d, validUsdValue: e, selectedStore: f, storeLocatorModel: g, storeModalIsVisible: h};
 	});
 
 var _user$project$ForexApp_App_Model$initAppModel = F2(
@@ -9916,7 +9941,21 @@ var _user$project$ForexApp_App_Model$Model = F3(
 		return {currentLocation: a, currentRoute: b, exchangePageModel: c};
 	});
 
+var _user$project$StoreLocator_Msg$ChangeView = function (a) {
+	return {ctor: 'ChangeView', _0: a};
+};
+var _user$project$StoreLocator_Msg$OnViewChange = {ctor: 'OnViewChange'};
+var _user$project$StoreLocator_Msg$OnStoreSelect = function (a) {
+	return {ctor: 'OnStoreSelect', _0: a};
+};
+
 var _user$project$ForexApp_App_Pages_Exchange_Msg$OnConfirm = {ctor: 'OnConfirm'};
+var _user$project$ForexApp_App_Pages_Exchange_Msg$SelectStoreMsg = function (a) {
+	return {ctor: 'SelectStoreMsg', _0: a};
+};
+var _user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores = function (a) {
+	return {ctor: 'OnDisplaySelectStores', _0: a};
+};
 var _user$project$ForexApp_App_Pages_Exchange_Msg$OnUsdChange = function (a) {
 	return {ctor: 'OnUsdChange', _0: a};
 };
@@ -9931,6 +9970,33 @@ var _user$project$ForexApp_App_Msg$ExchangePageMessage = function (a) {
 var _user$project$ForexApp_App_Msg$OnRouteChange = function (a) {
 	return {ctor: 'OnRouteChange', _0: a};
 };
+
+var _user$project$StoreLocator_Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'OnStoreSelect':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							selectedStore: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'OnViewChange':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{activeView: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
+	});
 
 var _user$project$ForexApp_App_Pages_Exchange_Update$update = F2(
 	function (msg, model) {
@@ -9970,8 +10036,27 @@ var _user$project$ForexApp_App_Pages_Exchange_Update$update = F2(
 						}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'OnConfirm':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'OnDisplaySelectStores':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{storeModalIsVisible: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				var _p1 = A2(_user$project$StoreLocator_Update$update, _p0._0, model.storeLocatorModel);
+				var widgetModel = _p1._0;
+				var widgetCmd = _p1._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{storeLocatorModel: widgetModel}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_App_Pages_Exchange_Msg$SelectStoreMsg, widgetCmd)
+				};
 		}
 	});
 
@@ -10005,6 +10090,512 @@ var _user$project$ForexApp_App_Update$update = F2(
 		}
 	});
 
+var _user$project$StoreLocator$storeListViewItem = F2(
+	function (selectedStore, store) {
+		return A2(
+			_elm_lang$html$Html$li,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'list-group-item', _1: true},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'd-flex', _1: true},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'justify-content-between', _1: true},
+								_1: {
+									ctor: '::',
+									_0: {
+										ctor: '_Tuple2',
+										_0: 'active',
+										_1: function () {
+											var _p0 = selectedStore;
+											if (_p0.ctor === 'Nothing') {
+												return false;
+											} else {
+												return _elm_lang$core$Native_Utils.eq(store, _p0._0);
+											}
+										}()
+									},
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$StoreLocator_Msg$OnStoreSelect(store)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h6,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('my-0'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(store.area),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$small,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(store.address),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(store.distance),
+									' miles')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$StoreLocator$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('col-md-12 order-md-12 mb-12'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$h4,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('d-flex justify-content-between align-items-center mb-3'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Select Store'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('list-group mb-3'),
+						_1: {ctor: '[]'}
+					},
+					A2(
+						_elm_lang$core$List$map,
+						_user$project$StoreLocator$storeListViewItem(model.selectedStore),
+						model.storeList)),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+
+var _user$project$ForexApp_App_Pages_Exchange_View$modal = F2(
+	function (html, isVisible) {
+		return _elm_lang$core$Native_Utils.eq(isVisible, true) ? A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'aria-labelledby', 'exampleModalLiveLabel'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$classList(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'modal', _1: true},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'fade', _1: true},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'show', _1: true},
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$id('exampleModalLive'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'dialog'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'display: block;'),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'tabindex', '-1'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('modal-dialog'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'document'),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$div,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('modal-content'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$div,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('modal-header'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$h5,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('modal-title'),
+														_1: {
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$id('exampleModalLiveLabel'),
+															_1: {ctor: '[]'}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Modal title'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$button,
+														{
+															ctor: '::',
+															_0: A2(_elm_lang$html$Html_Attributes$attribute, 'aria-label', 'Close'),
+															_1: {
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('close'),
+																_1: {
+																	ctor: '::',
+																	_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-dismiss', 'modal'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$type_('button'),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															}
+														},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$span,
+																{
+																	ctor: '::',
+																	_0: A2(_elm_lang$html$Html_Attributes$attribute, 'aria-hidden', 'true'),
+																	_1: {ctor: '[]'}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('×'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$div,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('modal-body'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: html,
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$div,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('modal-footer'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$button,
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html_Attributes$class('btn btn-primary'),
+																_1: {
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$type_('button'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onClick(
+																			_user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores(false)),
+																		_1: {ctor: '[]'}
+																	}
+																}
+															},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Close'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$classList(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'modal-backdrop', _1: true},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'fade', _1: true},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'show', _1: true},
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{ctor: '[]'}),
+					_1: {ctor: '[]'}
+				}
+			}) : A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{ctor: '[]'});
+	});
+var _user$project$ForexApp_App_Pages_Exchange_View$selectedStore = function (store) {
+	var _p0 = store;
+	if (_p0.ctor === 'Nothing') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('list-group-item d-flex justify-content-between bg-light'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores(true)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h6,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('my-0'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Click here to select store'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$small,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(''),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(''),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	} else {
+		var _p1 = _p0._0;
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('list-group-item d-flex justify-content-between bg-light'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores(true)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$h6,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('my-0'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(_p1.area),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$small,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(_p1.address),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$span,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('text-muted'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_elm_lang$core$Basics$toString(_p1.distance),
+									'miles')),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	}
+};
 var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -10314,7 +10905,11 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 															}
 														}
 													}),
-												_1: {ctor: '[]'}
+												_1: {
+													ctor: '::',
+													_0: _user$project$ForexApp_App_Pages_Exchange_View$selectedStore(model.storeLocatorModel.selectedStore),
+													_1: {ctor: '[]'}
+												}
 											}
 										}
 									}),
@@ -10361,7 +10956,17 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 						_1: {ctor: '[]'}
 					}
 				}),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_user$project$ForexApp_App_Pages_Exchange_View$modal,
+					A2(
+						_elm_lang$html$Html$map,
+						_user$project$ForexApp_App_Pages_Exchange_Msg$SelectStoreMsg,
+						_user$project$StoreLocator$view(model.storeLocatorModel)),
+					model.storeModalIsVisible),
+				_1: {ctor: '[]'}
+			}
 		});
 };
 
