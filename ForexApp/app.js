@@ -10103,6 +10103,67 @@ var _user$project$ForexApp_App_Update$update = F2(
 		}
 	});
 
+var _user$project$StoreLocator$mapView = function (model) {
+	var _p0 = {
+		ctor: '_Tuple2',
+		_0: {address: 'Address 1', area: 'Brixton', lat: 0, $long: 0, distance: 1.3},
+		_1: model.selectedStore
+	};
+	var firstItem = _p0._0;
+	var selectedStore = _p0._1;
+	var _p1 = selectedStore;
+	if (_p1.ctor === 'Nothing') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$img,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$src('/assests/images/map.png'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'width: 60%'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$StoreLocator_Msg$OnStoreSelect(firstItem)),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$img,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$src('/assests/images/map-selected.png'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'width: 60%'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$StoreLocator_Msg$OnStoreSelect(firstItem)),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
+	}
+};
 var _user$project$StoreLocator$storeListViewItem = F2(
 	function (selectedStore, store) {
 		return A2(
@@ -10125,11 +10186,11 @@ var _user$project$StoreLocator$storeListViewItem = F2(
 										ctor: '_Tuple2',
 										_0: 'active',
 										_1: function () {
-											var _p0 = selectedStore;
-											if (_p0.ctor === 'Nothing') {
+											var _p2 = selectedStore;
+											if (_p2.ctor === 'Nothing') {
 												return false;
 											} else {
-												return _elm_lang$core$Native_Utils.eq(store, _p0._0);
+												return _elm_lang$core$Native_Utils.eq(store, _p2._0);
 											}
 										}()
 									},
@@ -10195,6 +10256,19 @@ var _user$project$StoreLocator$storeListViewItem = F2(
 				}
 			});
 	});
+var _user$project$StoreLocator$listView = function (model) {
+	return A2(
+		_elm_lang$html$Html$ul,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('list-group mb-3'),
+			_1: {ctor: '[]'}
+		},
+		A2(
+			_elm_lang$core$List$map,
+			_user$project$StoreLocator$storeListViewItem(model.selectedStore),
+			model.storeList));
+};
 var _user$project$StoreLocator$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -10231,17 +10305,115 @@ var _user$project$StoreLocator$view = function (model) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_elm_lang$html$Html$ul,
+					_elm_lang$html$Html$div,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('list-group mb-3'),
+						_0: _elm_lang$html$Html_Attributes$class('mb-4'),
 						_1: {ctor: '[]'}
 					},
-					A2(
-						_elm_lang$core$List$map,
-						_user$project$StoreLocator$storeListViewItem(model.selectedStore),
-						model.storeList)),
-				_1: {ctor: '[]'}
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$classList(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'btn', _1: true},
+										_1: {
+											ctor: '::',
+											_0: {
+												ctor: '_Tuple2',
+												_0: 'btn-light',
+												_1: !_elm_lang$core$Native_Utils.eq(model.activeView, _user$project$StoreLocator_Model$ListView)
+											},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'btn-dark',
+													_1: _elm_lang$core$Native_Utils.eq(model.activeView, _user$project$StoreLocator_Model$ListView)
+												},
+												_1: {ctor: '[]'}
+											}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$type_('button'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onClick(
+											_user$project$StoreLocator_Msg$ChangeView(_user$project$StoreLocator_Model$ListView)),
+										_1: {ctor: '[]'}
+									}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('List View'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$classList(
+										{
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'btn', _1: true},
+											_1: {
+												ctor: '::',
+												_0: {
+													ctor: '_Tuple2',
+													_0: 'btn-light',
+													_1: !_elm_lang$core$Native_Utils.eq(model.activeView, _user$project$StoreLocator_Model$MapView)
+												},
+												_1: {
+													ctor: '::',
+													_0: {
+														ctor: '_Tuple2',
+														_0: 'btn-dark',
+														_1: _elm_lang$core$Native_Utils.eq(model.activeView, _user$project$StoreLocator_Model$MapView)
+													},
+													_1: {ctor: '[]'}
+												}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$type_('button'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(
+												_user$project$StoreLocator_Msg$ChangeView(_user$project$StoreLocator_Model$MapView)),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Map View'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: function () {
+						var _p3 = model.activeView;
+						if (_p3.ctor === 'ListView') {
+							return _user$project$StoreLocator$listView(model);
+						} else {
+							return _user$project$StoreLocator$mapView(model);
+						}
+					}(),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
