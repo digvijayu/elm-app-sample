@@ -9964,6 +9964,7 @@ var _user$project$ForexApp_App_Pages_Exchange_Msg$OnGbpChange = function (a) {
 };
 
 var _user$project$ForexApp_App_Msg$Other = {ctor: 'Other'};
+var _user$project$ForexApp_App_Msg$ResetForexData = {ctor: 'ResetForexData'};
 var _user$project$ForexApp_App_Msg$ExchangePageMessage = function (a) {
 	return {ctor: 'ExchangePageMessage', _0: a};
 };
@@ -10037,7 +10038,11 @@ var _user$project$ForexApp_App_Pages_Exchange_Update$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'OnConfirm':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _elm_lang$navigation$Navigation$newUrl('#confirm')
+				};
 			case 'OnDisplaySelectStores':
 				return {
 					ctor: '_Tuple2',
@@ -10085,8 +10090,16 @@ var _user$project$ForexApp_App_Update$update = F2(
 						{exchangePageModel: updatedWidgetModel}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_App_Msg$ExchangePageMessage, widgetCmd)
 				};
-			default:
+			case 'Other':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{exchangePageModel: _user$project$ForexApp_App_Pages_Exchange_Model$initialModel}),
+					_1: _elm_lang$navigation$Navigation$newUrl('#')
+				};
 		}
 	});
 
@@ -10596,6 +10609,15 @@ var _user$project$ForexApp_App_Pages_Exchange_View$selectedStore = function (sto
 			});
 	}
 };
+var _user$project$ForexApp_App_Pages_Exchange_View$disableConfirm = function (model) {
+	var selectedStore = model.storeLocatorModel.selectedStore;
+	var _p2 = selectedStore;
+	if (_p2.ctor === 'Nothing') {
+		return true;
+	} else {
+		return !(model.validUsdValue && model.validGbpValue);
+	}
+};
 var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -10926,19 +10948,20 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 									_1: {
 										ctor: '::',
 										_0: A2(
-											_elm_lang$html$Html$a,
+											_elm_lang$html$Html$button,
 											{
 												ctor: '::',
 												_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$disabled(!(model.validUsdValue && model.validGbpValue)),
+													_0: _elm_lang$html$Html_Attributes$disabled(
+														_user$project$ForexApp_App_Pages_Exchange_View$disableConfirm(model)),
 													_1: {
 														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$href('#confirm'),
+														_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
 														_1: {
 															ctor: '::',
-															_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
+															_0: _elm_lang$html$Html_Events$onClick(_user$project$ForexApp_App_Pages_Exchange_Msg$OnConfirm),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -11298,16 +11321,16 @@ var _user$project$ForexApp_App_Pages_Confirm_View$view = function (appModel) {
 								{
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$a,
+										_elm_lang$html$Html$button,
 										{
 											ctor: '::',
 											_0: _elm_lang$html$Html_Attributes$class('btn btn-lg btn-primary'),
 											_1: {
 												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$href('#'),
+												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
 												_1: {
 													ctor: '::',
-													_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$ForexApp_App_Msg$ResetForexData),
 													_1: {ctor: '[]'}
 												}
 											}

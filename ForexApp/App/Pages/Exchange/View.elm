@@ -56,12 +56,24 @@ view model =
                 ]
             , hr [ class "mb-4" ]
                 []
-            , a [ class "btn btn-lg btn-primary", disabled (not (model.validUsdValue && model.validGbpValue)), href "#confirm", attribute "role" "button" ]
+            , button [ class "btn btn-lg btn-primary", disabled (disableConfirm model), attribute "role" "button", onClick Msg.OnConfirm]
                 [ text "Confirm" ]
             ]
       ]
     , modal (Html.map Msg.SelectStoreMsg (StoreLocator.view model.storeLocatorModel)) model.storeModalIsVisible
     ]
+
+
+disableConfirm : Model -> Bool
+disableConfirm model =
+  let
+    selectedStore = model.storeLocatorModel.selectedStore
+  in
+  case selectedStore of
+    Nothing ->
+      True
+    Just selectedStore ->
+      not(model.validUsdValue && model.validGbpValue)
 
 
 selectedStore : Maybe StoreLocator.Model.Store -> Html Msg.Msg

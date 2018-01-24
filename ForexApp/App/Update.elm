@@ -3,6 +3,8 @@ import ForexApp.App.Model exposing (Model)
 import ForexApp.App.Route exposing (..)
 import ForexApp.App.Msg as Msg exposing (Msg)
 import ForexApp.App.Pages.Exchange.Update
+import ForexApp.App.Pages.Exchange.Model
+import Navigation
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -24,3 +26,6 @@ update msg model =
 
     Msg.Other ->
       (model, Cmd.none)
+
+    Msg.ResetForexData ->
+      ( { model | exchangePageModel = ForexApp.App.Pages.Exchange.Model.initialModel }, Navigation.newUrl("#") )

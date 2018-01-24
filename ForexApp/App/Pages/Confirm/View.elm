@@ -1,10 +1,12 @@
 module ForexApp.App.Pages.Confirm.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Json.Encode exposing (string)
 import ForexApp.App.Model as Model
+import ForexApp.App.Msg as Msg
 
-view : Model.Model -> Html msg
+view : Model.Model -> Html Msg.Msg
 view appModel =
   div [ class "container col-md-4 order-md-2 mb-4" ]
     [ h4 [ class "d-flex justify-content-between align-items-center mb-3" ]
@@ -55,7 +57,7 @@ view appModel =
         ]
     , Html.form [ class "card p-2" ]
         [ div [ class "input-group" ]
-            [ a [ class "btn btn-lg btn-primary", href "#", attribute "role" "button" ]
+            [ button [ class "btn btn-lg btn-primary", attribute "role" "button", onClick Msg.ResetForexData ]
                 [ text "Book Another" ]
             ]
         ]

@@ -64,7 +64,7 @@ home : Model -> Html Msg
 home model =
   Html.map ForexApp.App.Msg.ExchangePageMessage (ForexApp.App.Pages.Exchange.View.view model.exchangePageModel)
 
-confirmPage : Model -> Html msg
+confirmPage : Model -> Html Msg
 confirmPage model =
   ForexApp.App.Pages.Confirm.View.view model
 
