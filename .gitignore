@@ -1,4 +1,19 @@
 # elm-package generated files
 elm-stuff
+
 # elm-repl generated files
 repl-temp-*
+
+
+# Reserve and Collect Cordova app
+ReserveAndCollect/node_modules
+ReserveAndCollect/platforms/android/assets/www
+ReserveAndCollect/platforms/android/bin/
+ReserveAndCollect/platforms/android/gen/
+ReserveAndCollect/platforms/android/res/xml/config.xml
+ReserveAndCollect/platforms/ios/build/
+ReserveAndCollect/platforms/ios/CordovaLib/build/
+ReserveAndCollect/platforms/ios/www
+ReserveAndCollect/platforms/ios/MyPace/config.xml
+ReserveAndCollect/platforms/ios/.staging
+ReserveAndCollect/platforms/ios/cordova/console.log
