@@ -10053,7 +10053,7 @@ var _user$project$StoreLocator_Update$update = F2(
 		}
 	});
 
-var _user$project$StoreLocator$decodeMetadata = A6(
+var _user$project$StoreLocator_DataModules_StoreList$decodeMetadata = A6(
 	_elm_lang$core$Json_Decode$map5,
 	_user$project$StoreLocator_Model$Store,
 	A2(_elm_lang$core$Json_Decode$field, 'address', _elm_lang$core$Json_Decode$string),
@@ -10061,76 +10061,120 @@ var _user$project$StoreLocator$decodeMetadata = A6(
 	A2(_elm_lang$core$Json_Decode$field, 'lat', _elm_lang$core$Json_Decode$float),
 	A2(_elm_lang$core$Json_Decode$field, 'long', _elm_lang$core$Json_Decode$float),
 	A2(_elm_lang$core$Json_Decode$field, 'distance', _elm_lang$core$Json_Decode$float));
-var _user$project$StoreLocator$storeListDecoder = _elm_lang$core$Json_Decode$list(_user$project$StoreLocator$decodeMetadata);
-var _user$project$StoreLocator$loadStores = function () {
-	var some = A2(_elm_lang$core$Debug$log, 'I am here', 1);
+var _user$project$StoreLocator_DataModules_StoreList$storeListDecoder = _elm_lang$core$Json_Decode$list(_user$project$StoreLocator_DataModules_StoreList$decodeMetadata);
+var _user$project$StoreLocator_DataModules_StoreList$loadStores = function () {
+	var someLogMsg = A2(_elm_lang$core$Debug$log, 'Loading the Store List.. ', 1);
 	return A2(
 		_elm_lang$http$Http$send,
 		_user$project$StoreLocator_Msg$DefferedStoresLoadedFromServer,
-		A2(_elm_lang$http$Http$get, '/assests/data/store-list.json', _user$project$StoreLocator$storeListDecoder));
+		A2(_elm_lang$http$Http$get, '/assests/data/store-list.json', _user$project$StoreLocator_DataModules_StoreList$storeListDecoder));
 }();
-var _user$project$StoreLocator$mapView = function (model) {
-	var _p0 = {
-		ctor: '_Tuple2',
-		_0: {address: 'Address 1', area: 'Brixton', lat: 0, $long: 0, distance: 1.3},
-		_1: model.selectedStore
-	};
-	var firstItem = _p0._0;
-	var selectedStore = _p0._1;
-	var _p1 = selectedStore;
-	if (_p1.ctor === 'Nothing') {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$img,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$src('/assests/images/map.png'),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'width: 60%'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									_user$project$StoreLocator_Msg$OnStoreSelect(firstItem)),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			});
-	} else {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$img,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$src('/assests/images/map-selected.png'),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'width: 60%'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									_user$project$StoreLocator_Msg$OnStoreSelect(firstItem)),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {ctor: '[]'}
-			});
-	}
-};
-var _user$project$StoreLocator$storeListViewItem = F2(
+
+var _user$project$ForexApp_Pages_Exchange_Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'OnGbpChange':
+				var gbpAmt = A2(
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toFloat(_p0._0));
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							gbpAmount: gbpAmt,
+							usdAmount: (_elm_lang$core$Native_Utils.cmp(gbpAmt, 0) > 0) ? (gbpAmt * model.exchangeRate) : 0,
+							validGbpValue: _elm_lang$core$Native_Utils.cmp(gbpAmt, 0) > 0,
+							validUsdValue: true
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'OnUsdChange':
+				var usdAmt = A2(
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toFloat(_p0._0));
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							usdAmount: usdAmt,
+							gbpAmount: (_elm_lang$core$Native_Utils.cmp(usdAmt, 0) > 0) ? (usdAmt / model.exchangeRate) : 0,
+							validGbpValue: true,
+							validUsdValue: _elm_lang$core$Native_Utils.cmp(usdAmt, 0) > 0
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'OnConfirm':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _elm_lang$navigation$Navigation$newUrl('#confirm')
+				};
+			case 'OnDisplaySelectStores':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{storeModalIsVisible: _p0._0}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg, _user$project$StoreLocator_DataModules_StoreList$loadStores)
+				};
+			default:
+				var _p1 = A2(_user$project$StoreLocator_Update$update, _p0._0, model.storeLocatorModel);
+				var widgetModel = _p1._0;
+				var widgetCmd = _p1._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{storeLocatorModel: widgetModel}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg, widgetCmd)
+				};
+		}
+	});
+
+var _user$project$ForexApp_Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'OnRouteChange':
+				var _p1 = _p0._0;
+				var currentRoute = _user$project$ForexApp_Route$parseLocation(_p1);
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{currentLocation: _p1, currentRoute: currentRoute}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'ExchangePageMessage':
+				var _p2 = A2(_user$project$ForexApp_Pages_Exchange_Update$update, _p0._0, model.exchangePageModel);
+				var updatedWidgetModel = _p2._0;
+				var widgetCmd = _p2._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{exchangePageModel: updatedWidgetModel}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Msg$ExchangePageMessage, widgetCmd)
+				};
+			case 'Other':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{exchangePageModel: _user$project$ForexApp_Pages_Exchange_Model$initialModel}),
+					_1: _elm_lang$navigation$Navigation$newUrl('#')
+				};
+		}
+	});
+
+var _user$project$StoreLocator_Views_ListView$storeListViewItem = F2(
 	function (selectedStore, store) {
 		return A2(
 			_elm_lang$html$Html$li,
@@ -10152,11 +10196,11 @@ var _user$project$StoreLocator$storeListViewItem = F2(
 										ctor: '_Tuple2',
 										_0: 'active',
 										_1: function () {
-											var _p2 = selectedStore;
-											if (_p2.ctor === 'Nothing') {
+											var _p0 = selectedStore;
+											if (_p0.ctor === 'Nothing') {
 												return false;
 											} else {
-												return _elm_lang$core$Native_Utils.eq(store, _p2._0);
+												return _elm_lang$core$Native_Utils.eq(store, _p0._0);
 											}
 										}()
 									},
@@ -10222,7 +10266,7 @@ var _user$project$StoreLocator$storeListViewItem = F2(
 				}
 			});
 	});
-var _user$project$StoreLocator$listView = function (model) {
+var _user$project$StoreLocator_Views_ListView$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$ul,
 		{
@@ -10232,57 +10276,89 @@ var _user$project$StoreLocator$listView = function (model) {
 		},
 		A2(
 			_elm_lang$core$List$map,
-			_user$project$StoreLocator$storeListViewItem(model.selectedStore),
+			_user$project$StoreLocator_Views_ListView$storeListViewItem(model.selectedStore),
 			model.storeList));
 };
-var _user$project$StoreLocator$loadView = function (model) {
-	var errorInLoadingStores = model.errorInLoadingStores;
-	var _p3 = errorInLoadingStores;
-	if (_p3.ctor === 'Nothing') {
-		if (model.isLoadingStores) {
-			return A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('loader'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Loading....'),
-					_1: {ctor: '[]'}
-				});
-		} else {
-			var _p4 = model.activeView;
-			if (_p4.ctor === 'ListView') {
-				return _user$project$StoreLocator$listView(model);
-			} else {
-				return _user$project$StoreLocator$mapView(model);
-			}
-		}
+
+var _user$project$StoreLocator_Views_MapView$view = function (model) {
+	var _p0 = {
+		ctor: '_Tuple2',
+		_0: {address: 'Address 1', area: 'Brixton', lat: 0, $long: 0, distance: 1.3},
+		_1: model.selectedStore
+	};
+	var firstItem = _p0._0;
+	var selectedStore = _p0._1;
+	var _p1 = selectedStore;
+	if (_p1.ctor === 'Nothing') {
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$img,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$src('/assests/images/map.png'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'width: 60%'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$StoreLocator_Msg$OnStoreSelect(firstItem)),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {ctor: '[]'}
+			});
 	} else {
 		return A2(
 			_elm_lang$html$Html$div,
+			{ctor: '[]'},
 			{
 				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('alert alert-danger'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(_p3._0),
+				_0: A2(
+					_elm_lang$html$Html$img,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$src('/assests/images/map-selected.png'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'style', 'width: 60%'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(
+									_user$project$StoreLocator_Msg$OnStoreSelect(firstItem)),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
 				_1: {ctor: '[]'}
 			});
 	}
 };
-var _user$project$StoreLocator$view = function (model) {
+
+var _user$project$StoreLocator_Views_LoadingSpinner$view = A2(
+	_elm_lang$html$Html$div,
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html_Attributes$class('loader'),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: _elm_lang$html$Html$text('Loading....'),
+		_1: {ctor: '[]'}
+	});
+
+var _user$project$StoreLocator_Views_FrameView$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('col-md-12 order-md-12 mb-12'),
-			_1: {ctor: '[]'}
-		},
+		{ctor: '[]'},
 		{
 			ctor: '::',
 			_0: A2(
@@ -10408,118 +10484,62 @@ var _user$project$StoreLocator$view = function (model) {
 							_1: {ctor: '[]'}
 						}
 					}),
-				_1: {
-					ctor: '::',
-					_0: _user$project$StoreLocator$loadView(model),
-					_1: {ctor: '[]'}
-				}
+				_1: {ctor: '[]'}
 			}
 		});
 };
 
-var _user$project$ForexApp_Pages_Exchange_Update$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'OnGbpChange':
-				var gbpAmt = A2(
-					_elm_lang$core$Result$withDefault,
-					0,
-					_elm_lang$core$String$toFloat(_p0._0));
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							gbpAmount: gbpAmt,
-							usdAmount: (_elm_lang$core$Native_Utils.cmp(gbpAmt, 0) > 0) ? (gbpAmt * model.exchangeRate) : 0,
-							validGbpValue: _elm_lang$core$Native_Utils.cmp(gbpAmt, 0) > 0,
-							validUsdValue: true
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'OnUsdChange':
-				var usdAmt = A2(
-					_elm_lang$core$Result$withDefault,
-					0,
-					_elm_lang$core$String$toFloat(_p0._0));
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							usdAmount: usdAmt,
-							gbpAmount: (_elm_lang$core$Native_Utils.cmp(usdAmt, 0) > 0) ? (usdAmt / model.exchangeRate) : 0,
-							validGbpValue: true,
-							validUsdValue: _elm_lang$core$Native_Utils.cmp(usdAmt, 0) > 0
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'OnConfirm':
-				return {
-					ctor: '_Tuple2',
-					_0: model,
-					_1: _elm_lang$navigation$Navigation$newUrl('#confirm')
-				};
-			case 'OnDisplaySelectStores':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{storeModalIsVisible: _p0._0}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg, _user$project$StoreLocator$loadStores)
-				};
-			default:
-				var _p1 = A2(_user$project$StoreLocator_Update$update, _p0._0, model.storeLocatorModel);
-				var widgetModel = _p1._0;
-				var widgetCmd = _p1._1;
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{storeLocatorModel: widgetModel}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg, widgetCmd)
-				};
-		}
-	});
+var _user$project$StoreLocator_Views_ErrorMessage$view = function (errorMessage) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('alert alert-danger'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(errorMessage),
+			_1: {ctor: '[]'}
+		});
+};
 
-var _user$project$ForexApp_Update$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'OnRouteChange':
-				var _p1 = _p0._0;
-				var currentRoute = _user$project$ForexApp_Route$parseLocation(_p1);
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{currentLocation: _p1, currentRoute: currentRoute}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'ExchangePageMessage':
-				var _p2 = A2(_user$project$ForexApp_Pages_Exchange_Update$update, _p0._0, model.exchangePageModel);
-				var updatedWidgetModel = _p2._0;
-				var widgetCmd = _p2._1;
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{exchangePageModel: updatedWidgetModel}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Msg$ExchangePageMessage, widgetCmd)
-				};
-			case 'Other':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{exchangePageModel: _user$project$ForexApp_Pages_Exchange_Model$initialModel}),
-					_1: _elm_lang$navigation$Navigation$newUrl('#')
-				};
+var _user$project$StoreLocator$loadView = function (model) {
+	var errorInLoadingStores = model.errorInLoadingStores;
+	var _p0 = errorInLoadingStores;
+	if (_p0.ctor === 'Nothing') {
+		if (model.isLoadingStores) {
+			return _user$project$StoreLocator_Views_LoadingSpinner$view;
+		} else {
+			var _p1 = model.activeView;
+			if (_p1.ctor === 'ListView') {
+				return _user$project$StoreLocator_Views_ListView$view(model);
+			} else {
+				return _user$project$StoreLocator_Views_MapView$view(model);
+			}
 		}
-	});
+	} else {
+		return _user$project$StoreLocator_Views_ErrorMessage$view(_p0._0);
+	}
+};
+var _user$project$StoreLocator$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('col-md-12 order-md-12 mb-12'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$StoreLocator_Views_FrameView$view(model),
+			_1: {
+				ctor: '::',
+				_0: _user$project$StoreLocator$loadView(model),
+				_1: {ctor: '[]'}
+			}
+		});
+};
 
 var _user$project$ForexApp_Pages_Exchange_View$modal = F2(
 	function (html, isVisible) {
