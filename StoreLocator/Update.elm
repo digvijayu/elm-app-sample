@@ -1,6 +1,7 @@
 module StoreLocator.Update exposing (..)
 import StoreLocator.Msg as Msg
 import StoreLocator.Model as Model
+import Debug exposing (log)
 
 update : Msg.Msg -> Model.Model -> (Model.Model, Cmd Msg.Msg)
 update msg model =
@@ -11,3 +12,12 @@ update msg model =
       (model , Cmd.none)
     Msg.ChangeView view ->
       ({ model | activeView = view }, Cmd.none)
+    Msg.StoresLoadedFromServer serverResponse ->
+      let
+        some = log "update" serverResponse
+      in
+      case serverResponse of
+        Ok responseData ->
+          ({ model | isLoadingStores = False, errorInLoadingStores = Nothing, storeList = responseData }, Cmd.none)
+        Err _ ->
+          ({ model | isLoadingStores = False, errorInLoadingStores = Just "Unable to load stores.", storeList = [] }, Cmd.none)

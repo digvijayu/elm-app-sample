@@ -4,6 +4,9 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import StoreLocator.Model as Model
 import StoreLocator.Msg as Msg
+import Http
+import Json.Decode as Decode
+import Debug exposing (log)
 
 
 view : Model.Model -> Html Msg.Msg
@@ -78,3 +81,25 @@ mapView model =
         div [] [
           img [ src "/assests/images/map-selected.png", attribute "style" "width: 60%", onClick (Msg.OnStoreSelect firstItem) ] []
         ]
+
+loadStores : Cmd Msg.Msg
+loadStores =
+  let
+    some = log "I am here" 1
+  in
+    Http.get "/assests/data/store-list.json" storeListDecoder
+    |> Http.send Msg.StoresLoadedFromServer
+
+
+decodeMetadata : Decode.Decoder Model.Store
+decodeMetadata =
+  Decode.map5 Model.Store
+    (Decode.field "address" Decode.string)
+    (Decode.field "area" Decode.string)
+    (Decode.field "lat" Decode.float)
+    (Decode.field "long" Decode.float)
+    (Decode.field "distance" Decode.float)
+
+storeListDecoder : Decode.Decoder (List Model.Store)
+storeListDecoder =
+  Decode.list decodeMetadata

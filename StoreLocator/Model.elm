@@ -14,6 +14,8 @@ type alias Model =
   { activeView : View
   , storeList : List Store
   , selectedStore : Maybe Store
+  , isLoadingStores : Bool
+  , errorInLoadingStores : Maybe String
   }
 
 initialModel : Model
@@ -21,6 +23,8 @@ initialModel =
   { activeView = ListView
   , storeList = initialStoreList
   , selectedStore = Nothing
+  , isLoadingStores = True
+  , errorInLoadingStores = Nothing
   }
 
 initialStoreList : List Store
