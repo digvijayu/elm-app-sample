@@ -9941,6 +9941,9 @@ var _user$project$ForexApp_App_Model$Model = F3(
 		return {currentLocation: a, currentRoute: b, exchangePageModel: c};
 	});
 
+var _user$project$StoreLocator_Msg$DefferedStoresLoadedFromServer = function (a) {
+	return {ctor: 'DefferedStoresLoadedFromServer', _0: a};
+};
 var _user$project$StoreLocator_Msg$StoresLoadedFromServer = function (a) {
 	return {ctor: 'StoresLoadedFromServer', _0: a};
 };
@@ -9975,6 +9978,17 @@ var _user$project$ForexApp_App_Msg$OnRouteChange = function (a) {
 	return {ctor: 'OnRouteChange', _0: a};
 };
 
+var _user$project$StoreLocator_Update$delay = F2(
+	function (time, msg) {
+		return A2(
+			_elm_lang$core$Task$perform,
+			_elm_lang$core$Basics$identity,
+			A2(
+				_elm_lang$core$Task$andThen,
+				_elm_lang$core$Basics$always(
+					_elm_lang$core$Task$succeed(msg)),
+				_elm_lang$core$Process$sleep(time)));
+	});
 var _user$project$StoreLocator_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -9999,7 +10013,7 @@ var _user$project$StoreLocator_Update$update = F2(
 						{activeView: _p0._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
+			case 'StoresLoadedFromServer':
 				var _p2 = _p0._0;
 				var some = A2(_elm_lang$core$Debug$log, 'update', _p2);
 				var _p1 = _p2;
@@ -10024,6 +10038,18 @@ var _user$project$StoreLocator_Update$update = F2(
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					model,
+					{
+						ctor: '::',
+						_0: A2(
+							_user$project$StoreLocator_Update$delay,
+							_elm_lang$core$Time$second * 2,
+							_user$project$StoreLocator_Msg$StoresLoadedFromServer(_p0._0)),
+						_1: {ctor: '[]'}
+					});
 		}
 	});
 
@@ -10040,7 +10066,7 @@ var _user$project$StoreLocator$loadStores = function () {
 	var some = A2(_elm_lang$core$Debug$log, 'I am here', 1);
 	return A2(
 		_elm_lang$http$Http$send,
-		_user$project$StoreLocator_Msg$StoresLoadedFromServer,
+		_user$project$StoreLocator_Msg$DefferedStoresLoadedFromServer,
 		A2(_elm_lang$http$Http$get, '/assests/data/store-list.json', _user$project$StoreLocator$storeListDecoder));
 }();
 var _user$project$StoreLocator$mapView = function (model) {
@@ -10209,6 +10235,46 @@ var _user$project$StoreLocator$listView = function (model) {
 			_user$project$StoreLocator$storeListViewItem(model.selectedStore),
 			model.storeList));
 };
+var _user$project$StoreLocator$loadView = function (model) {
+	var errorInLoadingStores = model.errorInLoadingStores;
+	var _p3 = errorInLoadingStores;
+	if (_p3.ctor === 'Nothing') {
+		if (model.isLoadingStores) {
+			return A2(
+				_elm_lang$html$Html$div,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('loader'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Loading....'),
+					_1: {ctor: '[]'}
+				});
+		} else {
+			var _p4 = model.activeView;
+			if (_p4.ctor === 'ListView') {
+				return _user$project$StoreLocator$listView(model);
+			} else {
+				return _user$project$StoreLocator$mapView(model);
+			}
+		}
+	} else {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('alert alert-danger'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(_p3._0),
+				_1: {ctor: '[]'}
+			});
+	}
+};
 var _user$project$StoreLocator$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -10344,14 +10410,7 @@ var _user$project$StoreLocator$view = function (model) {
 					}),
 				_1: {
 					ctor: '::',
-					_0: function () {
-						var _p3 = model.activeView;
-						if (_p3.ctor === 'ListView') {
-							return _user$project$StoreLocator$listView(model);
-						} else {
-							return _user$project$StoreLocator$mapView(model);
-						}
-					}(),
+					_0: _user$project$StoreLocator$loadView(model),
 					_1: {ctor: '[]'}
 				}
 			}

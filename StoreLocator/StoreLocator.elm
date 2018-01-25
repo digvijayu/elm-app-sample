@@ -9,6 +9,7 @@ import Json.Decode as Decode
 import Debug exposing (log)
 
 
+
 view : Model.Model -> Html Msg.Msg
 view model =
   div [ class "col-md-12 order-md-12 mb-12" ]
@@ -22,13 +23,27 @@ view model =
       , button [ classList [("btn", True), ("btn-light", model.activeView /= Model.MapView), ("btn-dark", model.activeView == Model.MapView)], type_ "button",onClick (Msg.ChangeView Model.MapView) ]
           [ text "Map View" ]
       ]
-    , case model.activeView of
-        Model.ListView ->
-          listView model
-        Model.MapView ->
-          mapView model
+    , loadView model
     ]
 
+
+loadView : Model.Model -> Html Msg.Msg
+loadView model =
+  let
+    errorInLoadingStores = model.errorInLoadingStores
+  in
+    case errorInLoadingStores of
+      Nothing ->
+        if model.isLoadingStores then
+          div [class "loader"] [text "Loading...."]
+        else
+          case model.activeView of
+              Model.ListView ->
+                listView model
+              Model.MapView ->
+                mapView model
+      Just errorInLoadingStores ->
+        div [class "alert alert-danger"] [text errorInLoadingStores]
 
 
 listView : Model.Model -> Html Msg.Msg
@@ -88,7 +103,7 @@ loadStores =
     some = log "I am here" 1
   in
     Http.get "/assests/data/store-list.json" storeListDecoder
-    |> Http.send Msg.StoresLoadedFromServer
+    |> Http.send Msg.DefferedStoresLoadedFromServer
 
 
 decodeMetadata : Decode.Decoder Model.Store
