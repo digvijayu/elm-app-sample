@@ -1,6 +1,6 @@
-module ForexApp.App.Pages.Exchange.Update exposing (..)
-import ForexApp.App.Pages.Exchange.Model exposing (Model)
-import ForexApp.App.Pages.Exchange.Msg as Msg
+module ForexApp.Pages.Exchange.Update exposing (..)
+import ForexApp.Pages.Exchange.Model exposing (Model)
+import ForexApp.Pages.Exchange.Msg as Msg
 import StoreLocator.Update
 import StoreLocator
 import Navigation

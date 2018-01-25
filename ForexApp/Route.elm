@@ -1,4 +1,4 @@
-module ForexApp.App.Route exposing (..)
+module ForexApp.Route exposing (..)
 import Navigation exposing (..)
 import UrlParser exposing (..)
 

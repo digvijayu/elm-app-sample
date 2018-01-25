@@ -1,12 +1,12 @@
-module ForexApp.App.View exposing(..)
+module ForexApp.View exposing(..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import ForexApp.App.Model exposing (Model)
-import ForexApp.App.Route as Route exposing (Route)
-import ForexApp.App.Msg exposing (Msg)
+import ForexApp.Model exposing (Model)
+import ForexApp.Route as Route exposing (Route)
+import ForexApp.Msg exposing (Msg)
 
-import ForexApp.App.Pages.Exchange.View
-import ForexApp.App.Pages.Confirm.View
+import ForexApp.Pages.Exchange.View
+import ForexApp.Pages.Confirm.View
 
 
 view : Model -> Html Msg
@@ -62,11 +62,11 @@ getPage model =
 
 home : Model -> Html Msg
 home model =
-  Html.map ForexApp.App.Msg.ExchangePageMessage (ForexApp.App.Pages.Exchange.View.view model.exchangePageModel)
+  Html.map ForexApp.Msg.ExchangePageMessage (ForexApp.Pages.Exchange.View.view model.exchangePageModel)
 
 confirmPage : Model -> Html Msg
 confirmPage model =
-  ForexApp.App.Pages.Confirm.View.view model
+  ForexApp.Pages.Confirm.View.view model
 
 notFoundPage : Html msg
 notFoundPage =

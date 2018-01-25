@@ -9876,28 +9876,28 @@ var _evancz$url_parser$UrlParser$intParam = function (name) {
 	return A2(_evancz$url_parser$UrlParser$customParam, name, _evancz$url_parser$UrlParser$intParamHelp);
 };
 
-var _user$project$ForexApp_App_Route$NotFoundRoute = {ctor: 'NotFoundRoute'};
-var _user$project$ForexApp_App_Route$ConfirmPage = {ctor: 'ConfirmPage'};
-var _user$project$ForexApp_App_Route$Home = {ctor: 'Home'};
-var _user$project$ForexApp_App_Route$matchers = _evancz$url_parser$UrlParser$oneOf(
+var _user$project$ForexApp_Route$NotFoundRoute = {ctor: 'NotFoundRoute'};
+var _user$project$ForexApp_Route$ConfirmPage = {ctor: 'ConfirmPage'};
+var _user$project$ForexApp_Route$Home = {ctor: 'Home'};
+var _user$project$ForexApp_Route$matchers = _evancz$url_parser$UrlParser$oneOf(
 	{
 		ctor: '::',
-		_0: A2(_evancz$url_parser$UrlParser$map, _user$project$ForexApp_App_Route$Home, _evancz$url_parser$UrlParser$top),
+		_0: A2(_evancz$url_parser$UrlParser$map, _user$project$ForexApp_Route$Home, _evancz$url_parser$UrlParser$top),
 		_1: {
 			ctor: '::',
 			_0: A2(
 				_evancz$url_parser$UrlParser$map,
-				_user$project$ForexApp_App_Route$ConfirmPage,
+				_user$project$ForexApp_Route$ConfirmPage,
 				_evancz$url_parser$UrlParser$s('confirm')),
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$ForexApp_App_Route$parseLocation = function (location) {
-	var _p0 = A2(_evancz$url_parser$UrlParser$parseHash, _user$project$ForexApp_App_Route$matchers, location);
+var _user$project$ForexApp_Route$parseLocation = function (location) {
+	var _p0 = A2(_evancz$url_parser$UrlParser$parseHash, _user$project$ForexApp_Route$matchers, location);
 	if (_p0.ctor === 'Just') {
 		return _p0._0;
 	} else {
-		return _user$project$ForexApp_App_Route$NotFoundRoute;
+		return _user$project$ForexApp_Route$NotFoundRoute;
 	}
 };
 
@@ -9926,17 +9926,17 @@ var _user$project$StoreLocator_Model$MapView = {ctor: 'MapView'};
 var _user$project$StoreLocator_Model$ListView = {ctor: 'ListView'};
 var _user$project$StoreLocator_Model$initialModel = {activeView: _user$project$StoreLocator_Model$ListView, storeList: _user$project$StoreLocator_Model$initialStoreList, selectedStore: _elm_lang$core$Maybe$Nothing, isLoadingStores: true, errorInLoadingStores: _elm_lang$core$Maybe$Nothing};
 
-var _user$project$ForexApp_App_Pages_Exchange_Model$initialModel = {gbpAmount: 100, usdAmount: 139, exchangeRate: 1.39, validGbpValue: true, validUsdValue: true, selectedStore: _elm_lang$core$Maybe$Nothing, storeLocatorModel: _user$project$StoreLocator_Model$initialModel, storeModalIsVisible: false};
-var _user$project$ForexApp_App_Pages_Exchange_Model$Model = F8(
+var _user$project$ForexApp_Pages_Exchange_Model$initialModel = {gbpAmount: 100, usdAmount: 139, exchangeRate: 1.39, validGbpValue: true, validUsdValue: true, selectedStore: _elm_lang$core$Maybe$Nothing, storeLocatorModel: _user$project$StoreLocator_Model$initialModel, storeModalIsVisible: false};
+var _user$project$ForexApp_Pages_Exchange_Model$Model = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {gbpAmount: a, usdAmount: b, exchangeRate: c, validGbpValue: d, validUsdValue: e, selectedStore: f, storeLocatorModel: g, storeModalIsVisible: h};
 	});
 
-var _user$project$ForexApp_App_Model$initAppModel = F2(
+var _user$project$ForexApp_Model$initAppModel = F2(
 	function (location, route) {
-		return {currentLocation: location, currentRoute: route, exchangePageModel: _user$project$ForexApp_App_Pages_Exchange_Model$initialModel};
+		return {currentLocation: location, currentRoute: route, exchangePageModel: _user$project$ForexApp_Pages_Exchange_Model$initialModel};
 	});
-var _user$project$ForexApp_App_Model$Model = F3(
+var _user$project$ForexApp_Model$Model = F3(
 	function (a, b, c) {
 		return {currentLocation: a, currentRoute: b, exchangePageModel: c};
 	});
@@ -9955,26 +9955,26 @@ var _user$project$StoreLocator_Msg$OnStoreSelect = function (a) {
 	return {ctor: 'OnStoreSelect', _0: a};
 };
 
-var _user$project$ForexApp_App_Pages_Exchange_Msg$OnConfirm = {ctor: 'OnConfirm'};
-var _user$project$ForexApp_App_Pages_Exchange_Msg$SelectStoreMsg = function (a) {
+var _user$project$ForexApp_Pages_Exchange_Msg$OnConfirm = {ctor: 'OnConfirm'};
+var _user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg = function (a) {
 	return {ctor: 'SelectStoreMsg', _0: a};
 };
-var _user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores = function (a) {
+var _user$project$ForexApp_Pages_Exchange_Msg$OnDisplaySelectStores = function (a) {
 	return {ctor: 'OnDisplaySelectStores', _0: a};
 };
-var _user$project$ForexApp_App_Pages_Exchange_Msg$OnUsdChange = function (a) {
+var _user$project$ForexApp_Pages_Exchange_Msg$OnUsdChange = function (a) {
 	return {ctor: 'OnUsdChange', _0: a};
 };
-var _user$project$ForexApp_App_Pages_Exchange_Msg$OnGbpChange = function (a) {
+var _user$project$ForexApp_Pages_Exchange_Msg$OnGbpChange = function (a) {
 	return {ctor: 'OnGbpChange', _0: a};
 };
 
-var _user$project$ForexApp_App_Msg$Other = {ctor: 'Other'};
-var _user$project$ForexApp_App_Msg$ResetForexData = {ctor: 'ResetForexData'};
-var _user$project$ForexApp_App_Msg$ExchangePageMessage = function (a) {
+var _user$project$ForexApp_Msg$Other = {ctor: 'Other'};
+var _user$project$ForexApp_Msg$ResetForexData = {ctor: 'ResetForexData'};
+var _user$project$ForexApp_Msg$ExchangePageMessage = function (a) {
 	return {ctor: 'ExchangePageMessage', _0: a};
 };
-var _user$project$ForexApp_App_Msg$OnRouteChange = function (a) {
+var _user$project$ForexApp_Msg$OnRouteChange = function (a) {
 	return {ctor: 'OnRouteChange', _0: a};
 };
 
@@ -10417,7 +10417,7 @@ var _user$project$StoreLocator$view = function (model) {
 		});
 };
 
-var _user$project$ForexApp_App_Pages_Exchange_Update$update = F2(
+var _user$project$ForexApp_Pages_Exchange_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
@@ -10467,7 +10467,7 @@ var _user$project$ForexApp_App_Pages_Exchange_Update$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{storeModalIsVisible: _p0._0}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_App_Pages_Exchange_Msg$SelectStoreMsg, _user$project$StoreLocator$loadStores)
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg, _user$project$StoreLocator$loadStores)
 				};
 			default:
 				var _p1 = A2(_user$project$StoreLocator_Update$update, _p0._0, model.storeLocatorModel);
@@ -10478,18 +10478,18 @@ var _user$project$ForexApp_App_Pages_Exchange_Update$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{storeLocatorModel: widgetModel}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_App_Pages_Exchange_Msg$SelectStoreMsg, widgetCmd)
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg, widgetCmd)
 				};
 		}
 	});
 
-var _user$project$ForexApp_App_Update$update = F2(
+var _user$project$ForexApp_Update$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
 			case 'OnRouteChange':
 				var _p1 = _p0._0;
-				var currentRoute = _user$project$ForexApp_App_Route$parseLocation(_p1);
+				var currentRoute = _user$project$ForexApp_Route$parseLocation(_p1);
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -10498,7 +10498,7 @@ var _user$project$ForexApp_App_Update$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'ExchangePageMessage':
-				var _p2 = A2(_user$project$ForexApp_App_Pages_Exchange_Update$update, _p0._0, model.exchangePageModel);
+				var _p2 = A2(_user$project$ForexApp_Pages_Exchange_Update$update, _p0._0, model.exchangePageModel);
 				var updatedWidgetModel = _p2._0;
 				var widgetCmd = _p2._1;
 				return {
@@ -10506,7 +10506,7 @@ var _user$project$ForexApp_App_Update$update = F2(
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{exchangePageModel: updatedWidgetModel}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_App_Msg$ExchangePageMessage, widgetCmd)
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _user$project$ForexApp_Msg$ExchangePageMessage, widgetCmd)
 				};
 			case 'Other':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
@@ -10515,13 +10515,13 @@ var _user$project$ForexApp_App_Update$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{exchangePageModel: _user$project$ForexApp_App_Pages_Exchange_Model$initialModel}),
+						{exchangePageModel: _user$project$ForexApp_Pages_Exchange_Model$initialModel}),
 					_1: _elm_lang$navigation$Navigation$newUrl('#')
 				};
 		}
 	});
 
-var _user$project$ForexApp_App_Pages_Exchange_View$modal = F2(
+var _user$project$ForexApp_Pages_Exchange_View$modal = F2(
 	function (html, isVisible) {
 		return _elm_lang$core$Native_Utils.eq(isVisible, true) ? A2(
 			_elm_lang$html$Html$div,
@@ -10693,7 +10693,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$modal = F2(
 																	_1: {
 																		ctor: '::',
 																		_0: _elm_lang$html$Html_Events$onClick(
-																			_user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores(false)),
+																			_user$project$ForexApp_Pages_Exchange_Msg$OnDisplaySelectStores(false)),
 																		_1: {ctor: '[]'}
 																	}
 																}
@@ -10743,7 +10743,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$modal = F2(
 			{ctor: '[]'},
 			{ctor: '[]'});
 	});
-var _user$project$ForexApp_App_Pages_Exchange_View$selectedStore = function (store) {
+var _user$project$ForexApp_Pages_Exchange_View$selectedStore = function (store) {
 	var _p0 = store;
 	if (_p0.ctor === 'Nothing') {
 		return A2(
@@ -10754,7 +10754,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$selectedStore = function (sto
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(
-						_user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores(true)),
+						_user$project$ForexApp_Pages_Exchange_Msg$OnDisplaySelectStores(true)),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -10821,7 +10821,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$selectedStore = function (sto
 				_1: {
 					ctor: '::',
 					_0: _elm_lang$html$Html_Events$onClick(
-						_user$project$ForexApp_App_Pages_Exchange_Msg$OnDisplaySelectStores(true)),
+						_user$project$ForexApp_Pages_Exchange_Msg$OnDisplaySelectStores(true)),
 					_1: {ctor: '[]'}
 				}
 			},
@@ -10884,7 +10884,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$selectedStore = function (sto
 			});
 	}
 };
-var _user$project$ForexApp_App_Pages_Exchange_View$disableConfirm = function (model) {
+var _user$project$ForexApp_Pages_Exchange_View$disableConfirm = function (model) {
 	var selectedStore = model.storeLocatorModel.selectedStore;
 	var _p2 = selectedStore;
 	if (_p2.ctor === 'Nothing') {
@@ -10893,7 +10893,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$disableConfirm = function (mo
 		return !(model.validUsdValue && model.validGbpValue);
 	}
 };
-var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
+var _user$project$ForexApp_Pages_Exchange_View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -10991,7 +10991,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 																				_elm_lang$core$Basics$toString(model.gbpAmount)),
 																			_1: {
 																				ctor: '::',
-																				_0: _elm_lang$html$Html_Events$onInput(_user$project$ForexApp_App_Pages_Exchange_Msg$OnGbpChange),
+																				_0: _elm_lang$html$Html_Events$onInput(_user$project$ForexApp_Pages_Exchange_Msg$OnGbpChange),
 																				_1: {ctor: '[]'}
 																			}
 																		}
@@ -11166,7 +11166,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 																						_elm_lang$core$Basics$toString(model.usdAmount)),
 																					_1: {
 																						ctor: '::',
-																						_0: _elm_lang$html$Html_Events$onInput(_user$project$ForexApp_App_Pages_Exchange_Msg$OnUsdChange),
+																						_0: _elm_lang$html$Html_Events$onInput(_user$project$ForexApp_Pages_Exchange_Msg$OnUsdChange),
 																						_1: {ctor: '[]'}
 																					}
 																				}
@@ -11204,7 +11204,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 													}),
 												_1: {
 													ctor: '::',
-													_0: _user$project$ForexApp_App_Pages_Exchange_View$selectedStore(model.storeLocatorModel.selectedStore),
+													_0: _user$project$ForexApp_Pages_Exchange_View$selectedStore(model.storeLocatorModel.selectedStore),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -11230,13 +11230,13 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 												_1: {
 													ctor: '::',
 													_0: _elm_lang$html$Html_Attributes$disabled(
-														_user$project$ForexApp_App_Pages_Exchange_View$disableConfirm(model)),
+														_user$project$ForexApp_Pages_Exchange_View$disableConfirm(model)),
 													_1: {
 														ctor: '::',
 														_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
 														_1: {
 															ctor: '::',
-															_0: _elm_lang$html$Html_Events$onClick(_user$project$ForexApp_App_Pages_Exchange_Msg$OnConfirm),
+															_0: _elm_lang$html$Html_Events$onClick(_user$project$ForexApp_Pages_Exchange_Msg$OnConfirm),
 															_1: {ctor: '[]'}
 														}
 													}
@@ -11257,10 +11257,10 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 			_1: {
 				ctor: '::',
 				_0: A2(
-					_user$project$ForexApp_App_Pages_Exchange_View$modal,
+					_user$project$ForexApp_Pages_Exchange_View$modal,
 					A2(
 						_elm_lang$html$Html$map,
-						_user$project$ForexApp_App_Pages_Exchange_Msg$SelectStoreMsg,
+						_user$project$ForexApp_Pages_Exchange_Msg$SelectStoreMsg,
 						_user$project$StoreLocator$view(model.storeLocatorModel)),
 					model.storeModalIsVisible),
 				_1: {ctor: '[]'}
@@ -11268,7 +11268,7 @@ var _user$project$ForexApp_App_Pages_Exchange_View$view = function (model) {
 		});
 };
 
-var _user$project$ForexApp_App_Pages_Confirm_View$view = function (appModel) {
+var _user$project$ForexApp_Pages_Confirm_View$view = function (appModel) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -11605,7 +11605,7 @@ var _user$project$ForexApp_App_Pages_Confirm_View$view = function (appModel) {
 												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'role', 'button'),
 												_1: {
 													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$ForexApp_App_Msg$ResetForexData),
+													_0: _elm_lang$html$Html_Events$onClick(_user$project$ForexApp_Msg$ResetForexData),
 													_1: {ctor: '[]'}
 												}
 											}
@@ -11625,7 +11625,7 @@ var _user$project$ForexApp_App_Pages_Confirm_View$view = function (appModel) {
 		});
 };
 
-var _user$project$ForexApp_App_View$notFoundPage = A2(
+var _user$project$ForexApp_View$notFoundPage = A2(
 	_elm_lang$html$Html$div,
 	{ctor: '[]'},
 	{
@@ -11648,27 +11648,27 @@ var _user$project$ForexApp_App_View$notFoundPage = A2(
 			_1: {ctor: '[]'}
 		}
 	});
-var _user$project$ForexApp_App_View$confirmPage = function (model) {
-	return _user$project$ForexApp_App_Pages_Confirm_View$view(model);
+var _user$project$ForexApp_View$confirmPage = function (model) {
+	return _user$project$ForexApp_Pages_Confirm_View$view(model);
 };
-var _user$project$ForexApp_App_View$home = function (model) {
+var _user$project$ForexApp_View$home = function (model) {
 	return A2(
 		_elm_lang$html$Html$map,
-		_user$project$ForexApp_App_Msg$ExchangePageMessage,
-		_user$project$ForexApp_App_Pages_Exchange_View$view(model.exchangePageModel));
+		_user$project$ForexApp_Msg$ExchangePageMessage,
+		_user$project$ForexApp_Pages_Exchange_View$view(model.exchangePageModel));
 };
-var _user$project$ForexApp_App_View$getPage = function (model) {
+var _user$project$ForexApp_View$getPage = function (model) {
 	var _p0 = model.currentRoute;
 	switch (_p0.ctor) {
 		case 'Home':
-			return _user$project$ForexApp_App_View$home(model);
+			return _user$project$ForexApp_View$home(model);
 		case 'ConfirmPage':
-			return _user$project$ForexApp_App_View$confirmPage(model);
+			return _user$project$ForexApp_View$confirmPage(model);
 		default:
-			return _user$project$ForexApp_App_View$notFoundPage;
+			return _user$project$ForexApp_View$notFoundPage;
 	}
 };
-var _user$project$ForexApp_App_View$view = function (model) {
+var _user$project$ForexApp_View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -11940,33 +11940,32 @@ var _user$project$ForexApp_App_View$view = function (model) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: _user$project$ForexApp_App_View$getPage(model),
+				_0: _user$project$ForexApp_View$getPage(model),
 				_1: {ctor: '[]'}
 			}
 		});
 };
 
-var _user$project$ForexApp_App$init = function (location) {
-	var currentRoute = _user$project$ForexApp_App_Route$parseLocation(location);
+var _user$project$ForexApp$init = function (location) {
+	var currentRoute = _user$project$ForexApp_Route$parseLocation(location);
 	return {
 		ctor: '_Tuple2',
-		_0: A2(_user$project$ForexApp_App_Model$initAppModel, location, currentRoute),
+		_0: A2(_user$project$ForexApp_Model$initAppModel, location, currentRoute),
 		_1: _elm_lang$core$Platform_Cmd$none
 	};
 };
-var _user$project$ForexApp_App$subscriptions = function (model) {
+var _user$project$ForexApp$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$none;
 };
-var _user$project$ForexApp_App$main = A2(
+var _user$project$ForexApp$main = A2(
 	_elm_lang$navigation$Navigation$program,
-	_user$project$ForexApp_App_Msg$OnRouteChange,
-	{init: _user$project$ForexApp_App$init, view: _user$project$ForexApp_App_View$view, update: _user$project$ForexApp_App_Update$update, subscriptions: _user$project$ForexApp_App$subscriptions})();
+	_user$project$ForexApp_Msg$OnRouteChange,
+	{init: _user$project$ForexApp$init, view: _user$project$ForexApp_View$view, update: _user$project$ForexApp_Update$update, subscriptions: _user$project$ForexApp$subscriptions})();
 
 var Elm = {};
 Elm['ForexApp'] = Elm['ForexApp'] || {};
-Elm['ForexApp']['App'] = Elm['ForexApp']['App'] || {};
-if (typeof _user$project$ForexApp_App$main !== 'undefined') {
-    _user$project$ForexApp_App$main(Elm['ForexApp']['App'], 'ForexApp.App', undefined);
+if (typeof _user$project$ForexApp$main !== 'undefined') {
+    _user$project$ForexApp$main(Elm['ForexApp'], 'ForexApp', undefined);
 }
 
 if (typeof define === "function" && define['amd'])

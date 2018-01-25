@@ -1,4 +1,4 @@
-module ForexApp.App.Pages.Exchange.Model exposing (..)
+module ForexApp.Pages.Exchange.Model exposing (..)
 import StoreLocator.Model
 
 type alias Model =

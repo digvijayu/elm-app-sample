@@ -5,7 +5,7 @@
     "license": "BSD3",
     "source-directories": [
         ".",
-        "./ForexApp/src/",
+        "./ForexApp/",
         "./HolidaysApp/src/",
         "./StoreLocator/"
     ],

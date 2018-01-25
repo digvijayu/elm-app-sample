@@ -1,9 +1,9 @@
-module ForexApp.App.Pages.Exchange.View exposing (..)
+module ForexApp.Pages.Exchange.View exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick, onInput)
-import ForexApp.App.Pages.Exchange.Model exposing (Model)
-import ForexApp.App.Pages.Exchange.Msg as Msg
+import ForexApp.Pages.Exchange.Model exposing (Model)
+import ForexApp.Pages.Exchange.Msg as Msg
 import StoreLocator.Model
 import StoreLocator
 

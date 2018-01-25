@@ -1,9 +1,9 @@
-module ForexApp.App.Update exposing (..)
-import ForexApp.App.Model exposing (Model)
-import ForexApp.App.Route exposing (..)
-import ForexApp.App.Msg as Msg exposing (Msg)
-import ForexApp.App.Pages.Exchange.Update
-import ForexApp.App.Pages.Exchange.Model
+module ForexApp.Update exposing (..)
+import ForexApp.Model exposing (Model)
+import ForexApp.Route exposing (..)
+import ForexApp.Msg as Msg exposing (Msg)
+import ForexApp.Pages.Exchange.Update
+import ForexApp.Pages.Exchange.Model
 import Navigation
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -20,7 +20,7 @@ update msg model =
     Msg.ExchangePageMessage subMsg ->
       let
         ( updatedWidgetModel, widgetCmd ) =
-            ForexApp.App.Pages.Exchange.Update.update subMsg model.exchangePageModel
+            ForexApp.Pages.Exchange.Update.update subMsg model.exchangePageModel
       in
         ( { model | exchangePageModel = updatedWidgetModel }, Cmd.map Msg.ExchangePageMessage widgetCmd )
 
@@ -28,4 +28,4 @@ update msg model =
       (model, Cmd.none)
 
     Msg.ResetForexData ->
-      ( { model | exchangePageModel = ForexApp.App.Pages.Exchange.Model.initialModel }, Navigation.newUrl("#") )
+      ( { model | exchangePageModel = ForexApp.Pages.Exchange.Model.initialModel }, Navigation.newUrl("#") )

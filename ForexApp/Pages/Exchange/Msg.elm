@@ -1,4 +1,4 @@
-module ForexApp.App.Pages.Exchange.Msg exposing (..)
+module ForexApp.Pages.Exchange.Msg exposing (..)
 import StoreLocator.Msg
 
 type Msg =
